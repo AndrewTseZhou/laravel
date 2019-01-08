@@ -29,7 +29,18 @@ class PostController extends Controller {
 
     //创建逻辑
     public function store() {
-
+        //表单提交分以下3步
+        //验证
+        $this->validate(request(), [
+            'title' => 'required|string|max:100|min:5',
+            'content' => 'required|string|min:10',
+        ]);
+        //具体的逻辑
+        $post = Post::create(request(['title', 'content']));
+        //dd: dump and die
+        //dd(request());//打印语句
+        //渲染
+        return redirect("/posts");
     }
 
     //编辑文章

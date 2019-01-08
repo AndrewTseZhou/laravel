@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 //表=>Posts
-class Post extends Model {
+class Post extends BaseModel {
 
+    protected $fillable = ['title', 'content'];//可以注入的数据字段
 }
