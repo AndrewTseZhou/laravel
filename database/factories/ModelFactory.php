@@ -22,3 +22,14 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+/**
+ * 自动生成文章
+ */
+$factory->define(\App\Post::class, function (\Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence(6),
+        'content' => $faker->paragraph(10),
+    ];
+});

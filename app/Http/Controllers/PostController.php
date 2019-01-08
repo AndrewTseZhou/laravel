@@ -7,17 +7,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 
 class PostController extends Controller {
 
     //文章列表页
     public function index() {
-        $posts = [
-            ['title' => "this is title1"],
-            ['title' => "this is title2"],
-            ['title' => "this is title3"],
-        ];
-//        return view("post/index", ['posts' => $posts]);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(6);
         return view("post/index", compact('posts'));
     }
 
