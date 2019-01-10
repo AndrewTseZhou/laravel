@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Http\Request;
 
 class PostController extends Controller {
 
@@ -56,5 +57,11 @@ class PostController extends Controller {
     //删除文章
     public function delete() {
 
+    }
+
+    //上传图片
+    public function imageUpload(Request $request) {
+        $path=$request->file('wangEditorH5File')->storePublicly(md5(time()));
+        return asset('storage/' . $path);
     }
 }
