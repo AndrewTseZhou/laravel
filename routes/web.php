@@ -22,7 +22,7 @@ Route::get('/posts', '\App\Http\Controllers\PostController@index');
 Route::get('/posts/create', '\App\Http\Controllers\PostController@create');
 Route::post('/posts', '\App\Http\Controllers\PostController@store');
 //删除文章
-Route::get('/posts/delete', '\App\Http\Controllers\PostController@delete');
+Route::get('/posts/{post}/delete', '\App\Http\Controllers\PostController@delete');
 //文章详情页 模型绑定方式
 Route::get('/posts/{post}', '\App\Http\Controllers\PostController@show');
 //编辑文章
