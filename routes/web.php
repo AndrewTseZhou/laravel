@@ -15,6 +15,23 @@
 //    return view('welcome');
 //});
 
+//用户模块
+//注册页面
+Route::get('/register', '\App\Http\Controllers\RegisterController@index');
+//注册行为
+Route::post('/register', '\App\Http\Controllers\RegisterController@register');
+//登录页面
+Route::get('/login', '\App\Http\Controllers\LoginController@index');
+//登录行为
+Route::post('/login', '\App\Http\Controllers\LoginController@login');
+//登出行为
+Route::get('/logout', '\App\Http\Controllers\LoginController@logout');
+//个人设置页面
+Route::get('/user/me/setting', '\App\Http\Controllers\UserController@setting');
+//个人设置行为
+Route::post('/user/me/setting', '\App\Http\Controllers\UserController@settingStore');
+
+
 //注意有绑定模型的路由，同路径的路由需要放在没绑定路由的后面
 //文章列表页
 Route::get('/posts', '\App\Http\Controllers\PostController@index');
