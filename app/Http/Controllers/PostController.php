@@ -8,7 +8,9 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller {
 
@@ -37,7 +39,9 @@ class PostController extends Controller {
             'content' => 'required|string|min:10',
         ]);
         //具体的逻辑
-        $post = Post::create(request(['title', 'content']));
+        $user_id = Auth::id();
+        $params = array_merge(request(['title', 'content']), compact('user_id'));
+        $post = Post::create($params);
         //dd: dump and die
         //dd(request());//打印语句
         //渲染
@@ -56,6 +60,11 @@ class PostController extends Controller {
             'title' => 'required|string|max:100|min:5',
             'content' => 'required|string|min:10',
         ]);
+
+        try {
+            $this->authorize('update', 'post');
+        } catch (AuthorizationException $e) {
+        }
         //逻辑
         $post->title = request('title');
         $post->content = request('content');
@@ -66,6 +75,10 @@ class PostController extends Controller {
 
     //删除文章
     public function delete(Post $post) {
+        try {
+            $this->authorize('delete', 'post');
+        } catch (AuthorizationException $e) {
+        }
         $post->delete();
         return redirect("/posts");
     }
