@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
@@ -87,5 +88,22 @@ class PostController extends Controller {
     public function imageUpload(Request $request) {
         $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
         return asset('storage/' . $path);
+    }
+
+    //提交评论
+    public function comment(Post $post) {
+        //验证
+        $this->validate(request(), [
+            'content' => 'required|min:3',
+        ]);
+
+        //逻辑
+        $comment = new Comment();
+        $comment->user_id = Auth::id();
+        $comment->content = request('content');
+        $post->comments()->save($comment);
+
+        //渲染
+        return back();
     }
 }
