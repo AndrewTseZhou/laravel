@@ -30,6 +30,10 @@ Route::get('/logout', '\App\Http\Controllers\LoginController@logout');
 Route::get('/user/me/setting', '\App\Http\Controllers\UserController@setting');
 //个人设置行为
 Route::post('/user/me/setting', '\App\Http\Controllers\UserController@settingStore');
+//个人中心
+Route::get('/user/{user}', '\App\Http\Controllers\UserController@show');
+Route::post('/user/{user}/fan', '\App\Http\Controllers\UserController@fan');
+Route::post('/user/{user}/unfan', '\App\Http\Controllers\UserController@unfan');
 
 
 //注意有绑定模型的路由，同路径的路由需要放在没绑定路由的后面
