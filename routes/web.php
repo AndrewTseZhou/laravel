@@ -59,3 +59,7 @@ Route::post('/posts/{post}/comment', '\App\Http\Controllers\PostController@comme
 Route::get('/posts/{post}/zan', '\App\Http\Controllers\PostController@zan');
 //取消赞
 Route::get('/posts/{post}/unzan', '\App\Http\Controllers\PostController@unzan');
+
+//专题详情页
+Route::get('/topic/{topic}', '\App\Http\Controllers\TopicController@show');
+Route::get('/topic/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
