@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\PostTopic;
 use App\Topic;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,6 +25,15 @@ class TopicController extends Controller {
 
     //投稿
     public function submit(Topic $topic) {
+        $this->validate(request(), [
+            'post_ids' => 'required|array',
+        ]);
 
+        $post_ids = request('post_ids');
+        $topic_id = $topic->id;
+        foreach ($post_ids as $post_id) {
+            PostTopic::firstOrCreate(compact('topic_id', 'post_id'));
+        }
+        return back();
     }
 }
