@@ -2,6 +2,8 @@
 
 namespace App;
 
-class AdminUser extends BaseModel {
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class AdminUser extends Authenticatable {
 
 }

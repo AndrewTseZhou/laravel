@@ -17,5 +17,8 @@ Route::group(['prefix' => 'admin'], function () {
     //登出行为
     Route::get('/logout', '\App\Admin\Controllers\LoginController@logout');
 
-    Route::get('/home', '\App\Admin\Controllers\HomeController@index');
+    Route::group(['middleware' => 'auth:admin'], function () {
+        //首页
+        Route::get('/home', '\App\Admin\Controllers\HomeController@index');
+    });
 });
