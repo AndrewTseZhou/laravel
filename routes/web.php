@@ -63,3 +63,6 @@ Route::get('/posts/{post}/unzan', '\App\Http\Controllers\PostController@unzan');
 //专题详情页
 Route::get('/topic/{topic}', '\App\Http\Controllers\TopicController@show');
 Route::get('/topic/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
+
+//管理后台
+include_once('admin.php');
