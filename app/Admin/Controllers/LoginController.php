@@ -7,6 +7,9 @@
 
 namespace App\Admin\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 
 class LoginController extends Controller {
 
@@ -17,11 +20,25 @@ class LoginController extends Controller {
 
     //登录行为
     public function login() {
+        //验证
+        $this->validate(request(), [
+            'name' => 'required|min:2',
+            'password' => 'required|min:5|max:10'
+        ]);
 
+        //逻辑
+        $user = request(['name', 'password']);
+        if (Auth::guard("admin")->attempt($user)) {
+            return redirect("/admin/home");
+        }
+
+        //渲染
+        return Redirect::back()->withError("用户名密码不匹配");
     }
 
     //登出行为
     public function logout() {
-
+        Auth::guard("admin")->logout();
+        return redirect('/admin/login');
     }
 }

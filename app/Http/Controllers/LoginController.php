@@ -28,7 +28,7 @@ class LoginController extends Controller {
         }
 
         //渲染
-        return Redirect::back()->withError("邮箱密码不匹配");
+        return Redirect::back()->withErrors("邮箱密码不匹配");
     }
 
     //登出行为
